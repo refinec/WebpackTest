@@ -22,10 +22,13 @@
     "webpack": "^5.11.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.1",
+    "webpack-merge": "^5.7.3",
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
     "lodash": "^4.17.20"
   },
-  "sideEffects":["*.css"] 
+  "sideEffects": [
+    "*.css"
+  ]
 }
