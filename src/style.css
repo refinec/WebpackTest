@@ -1,14 +1,12 @@
 @font-face {
     font-family: "iconfont";
-    src: url('./iconfont.eot');/* IE9 */
-    src: url('./iconfont.woff') format('woff'),
-        url('./iconfont.woff2') format('woff2');
+    src: url('./iconfont.woff') format('woff');
     font-weight: 600;
     font-style: italic;
 }
 
 .hello {
-    color: red;
+    color: blue;
     background: url('./icon.png') no-repeat;/*被webpack处理替换为 output 目录中图像的最终路径 */
     font-family: 'iconfont';
     

@@ -3,12 +3,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 清理 /dist 文件夹
 const { CleanWebpackPlugin }= require('clean-webpack-plugin');
+const webpack = require('webpack')
 
 module.exports = {
     mode:'development',
+    optimization:{
+        usedExports:true
+    },
     entry: {
         app:'./src/index.js',
-        print:'./src/print.js'
     },
 
     output: {
@@ -20,7 +23,8 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title:'管理输出'
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin() // 启用热模块替换 HMR
     ],
     module:{
         rules:[
@@ -68,5 +72,7 @@ module.exports = {
     devtool:'inline-source-map',
     devServer:{
         contentBase:'./dist', // // 告知 webpack-dev-server，将 dist 目录下的文件 serve 到 localhost:8080 下
-    }
+        hot:true
+    },
+
 }
