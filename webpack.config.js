@@ -1,12 +1,27 @@
 const path = require('path');
+// HtmlWebpackPlugin 还是会默认生成它自己的 index.html 文件
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 清理 /dist 文件夹
+const { CleanWebpackPlugin }= require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    mode:'development',
+    entry: {
+        app:'./src/index.js',
+        print:'./src/print.js'
+    },
+
     output: {
         // filename: 'main.js',
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    plugins:[
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title:'管理输出'
+        })
+    ],
     module:{
         rules:[
             // 配置 loader、解析器等选项
@@ -49,5 +64,9 @@ module.exports = {
                 ]
             }
         ]
+    },
+    devtool:'inline-source-map',
+    devServer:{
+        contentBase:'./dist', // // 告知 webpack-dev-server，将 dist 目录下的文件 serve 到 localhost:8080 下
     }
 }

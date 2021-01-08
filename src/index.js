@@ -17,7 +17,7 @@ function component() {
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello'); // 添加style.css中的样式
 
-    btn.innerHTML = '点击这里，然后查看 console！';
+    btn.innerHTML = '点击这里aaa，然后查看 console！';
     btn.onclick = printMe;
     element.appendChild(btn);
 
