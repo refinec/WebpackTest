@@ -12,6 +12,10 @@ import Icon from './icon.png' // 此图像将被处理并添加到 output 目录
 import Data from './data.xml'
 import printMe from './print';
 
+if (process.env.NODE_ENV !== 'production') {
+  console.log('当前开发环境!!!');
+}
+
 function component() {
   let element = document.createElement('div');
   let btn = document.createElement('button');

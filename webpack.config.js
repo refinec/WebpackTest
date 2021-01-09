@@ -12,11 +12,13 @@ module.exports = {
     },
     entry: {
         app:'./src/index.js',
+        // app:'./src/dynamicImport.js', // 动态导入
     },
 
     output: {
         // filename: 'main.js',
         filename: '[name].bundle.js',
+        chunkFilename:'[name].bundle.js', // 动态导入的输出
         path: path.resolve(__dirname, 'dist')
     },
     plugins:[
@@ -74,5 +76,9 @@ module.exports = {
         contentBase:'./dist', // // 告知 webpack-dev-server，将 dist 目录下的文件 serve 到 localhost:8080 下
         hot:true
     },
-
+    // optimization:{ // 代码分割
+    //     splitChunks:{
+    //         chunks: 'all'
+    //     }
+    // }
 }
