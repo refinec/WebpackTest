@@ -18,7 +18,8 @@ module.exports = {
 
     output: {
         // filename: 'main.js',
-        filename: '[name].bundle.js',
+        // filename: '[name].bundle.js',
+        filename:'[name].[contenthash].js',
         chunkFilename:'[name].bundle.js', // 动态导入的输出
         path: path.resolve(__dirname, 'dist')
     },
@@ -27,7 +28,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             title:'管理输出'
         }),
-        new webpack.HotModuleReplacementPlugin() // 启用热模块替换 HMR
+        new webpack.HotModuleReplacementPlugin(), // 启用热模块替换 HMR
+        // new webpack.HashedModuleIdsPlugin() // 生产环境插件。启用contenthash修复，vendor第三方chunk hash不变(webpack4没有这个问题)
     ],
     module:{
         rules:[
@@ -81,5 +83,17 @@ module.exports = {
     //     splitChunks:{
     //         chunks: 'all'
     //     }
-    // }
+    // },
+    optimization:{
+        runtimeChunk: 'single', // 将 runtime 代码拆分为一个单独的 chunk
+        splitChunks:{ // 将第三方库library提取到单独的vendor chunk文件中
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name:'vendors',
+                    chunks: 'all'
+                }
+            }
+        }
+    }
 }
