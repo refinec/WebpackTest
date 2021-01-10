@@ -11,8 +11,9 @@ module.exports = {
         usedExports:true
     },
     entry: {
-        app:'./src/index.js',
+        // app:'./src/index.js',
         // app:'./src/dynamicImport.js', // 动态导入
+        app:'./src/lazyLoading.js', // 懒加载
     },
 
     output: {
