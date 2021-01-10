@@ -11,9 +11,9 @@ module.exports = {
         usedExports:true
     },
     entry: {
-        // app:'./src/index.js',
+        app:'./src/index.js',
         // app:'./src/dynamicImport.js', // 动态导入
-        app:'./src/lazyLoading.js', // 懒加载
+        // app:'./src/lazyLoading.js', // 懒加载
     },
 
     output: {
@@ -30,6 +30,16 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(), // 启用热模块替换 HMR
         // new webpack.HashedModuleIdsPlugin() // 生产环境插件。启用contenthash修复，vendor第三方chunk hash不变(webpack4没有这个问题)
+        
+        // 该插件告诉webpack遇到了至少一处用到 _ 变量的模块实例，
+        // 那将 lodash package 引入进来，并将其提供给需要用到它的模块。舍去了 import _ from 'lodash'
+        new webpack.ProvidePlugin({
+            // _: 'lodash'
+
+            //  还可以使用 ProvidePlugin 暴露出某个模块中单个导出，通过配置一个“数组路径”（例如 [module, child, ...children?]）实现此功能。
+            // 这样就能很好的与 tree shaking 配合，将 lodash library 中的其余没有用到的导出去除
+            join:['lodash', 'join'], 
+        })
     ],
     module:{
         rules:[

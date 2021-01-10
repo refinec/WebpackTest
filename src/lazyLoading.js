@@ -1,4 +1,4 @@
-import _ from 'lodash'
+// import _ from 'lodash'
 function component(){
     let element = document.createElement('div');
     let button = document.createElement('button');
