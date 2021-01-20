@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 清理 /dist 文件夹
 const { CleanWebpackPlugin }= require('clean-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
@@ -39,7 +40,15 @@ module.exports = {
             //  还可以使用 ProvidePlugin 暴露出某个模块中单个导出，通过配置一个“数组路径”（例如 [module, child, ...children?]）实现此功能。
             // 这样就能很好的与 tree shaking 配合，将 lodash library 中的其余没有用到的导出去除
             join:['lodash', 'join'], 
+        }),
+        // 渐进式网络应用程序
+        new WorkboxPlugin.GenerateSW({
+            // 这些选项帮助快速启用 ServiceWorkers
+            // 不允许遗留任何“旧的” ServiceWorkers
+            clientsClaim:true,
+            skipWaiting:true
         })
+
     ],
     module:{
         rules:[

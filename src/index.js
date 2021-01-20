@@ -1,4 +1,4 @@
-// import _ from 'lodash'
+import _ from 'lodash'
 import {
   cube
 } from './math'
@@ -55,5 +55,19 @@ if (module.hot) {
     document.body.removeChild(element);
     element = component(); // 重新渲染 "component"，以便更新 click 事件处理函数
     document.body.appendChild(element);
+  })
+}
+
+/***
+ * 注册 Service Worker,开始渐进式web应用
+ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('./service-worker.js')
+    .then(registration =>{
+      console.log('SW registered: ', registration);
+    }).catch(registrationError =>{
+      console.log('SW registration failed: ', registrationError);
+    })
   })
 }
