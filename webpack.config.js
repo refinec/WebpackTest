@@ -90,10 +90,18 @@ module.exports = {
                 use:[
                     'xml-loader'
                 ]
+            },
+            { // 解析ts文件
+                test:/\.tsx?$/,
+                use:'ts-loader',
+                exclude:/node_modules/
             }
         ]
     },
-    devtool:'inline-source-map',
+    resolve:{
+        extensions:['.tsx', '.ts', '.js']
+    },
+    devtool:'inline-source-map', // 告诉 webpack 提取这些 source map，并内联到最终的 bundle 中
     devServer:{
         contentBase:'./dist', // // 告知 webpack-dev-server，将 dist 目录下的文件 serve 到 localhost:8080 下
         hot:true
